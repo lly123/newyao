@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * Created by richard on 6/8/15.
  */
 @Configuration
-@ComponentScan("com.freeroom")
+@ComponentScan({"com.freeroom.resource", "com.freeroom.service"})
 @EnableTransactionManagement
 @EnableJpaRepositories("com.freeroom.repository")
 public class NewyaoContainer {
@@ -35,22 +35,24 @@ public class NewyaoContainer {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setDatabase(Database.MYSQL);
         vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setShowSql(true);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("com.freeroom.domain");
         factory.setDataSource(dataSource());
-        return factory;
+        factory.afterPropertiesSet();
+
+        return factory.getObject();
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
-        final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
-        return transactionManager;
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(entityManagerFactory());
+        return txManager;
     }
 }
