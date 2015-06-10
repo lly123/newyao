@@ -5,6 +5,9 @@ import com.freeroom.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;

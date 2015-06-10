@@ -1,0 +1,11 @@
+# Logging settings.
+logging:
+    # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+    level: INFO
+
+    # Logger-specific levels.
+    loggers:
+      # Sets the level for 'com.example.app' to DEBUG.
+      io.dropwizard: INFO
+      org.hibernate: DEBUG
+      com.freeroom: DEBUG
