@@ -18,7 +18,7 @@ import javax.sql.DataSource;
  * Created by richard on 6/8/15.
  */
 @Configuration
-@ComponentScan({"com.freeroom.resource", "com.freeroom.service"})
+@ComponentScan({"com.freeroom.resource", "com.freeroom.service", "com.freeroom.websocket"})
 @EnableTransactionManagement
 @EnableJpaRepositories("com.freeroom.repository")
 public class NewyaoContainer {

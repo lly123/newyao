@@ -6,6 +6,7 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.Set;
 
@@ -39,5 +40,12 @@ public class TalkSocket extends WebSocketAdapter {
     public void onWebSocketText(String message) {
         LOGGER.debug("Session from {} received message: {}.",
                 getSession().getRemoteAddress().getHostName(), message);
+        try {
+            for (Session session : sessions) {
+                session.getRemote().sendString("Got it!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

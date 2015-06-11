@@ -2,12 +2,9 @@ package com.freeroom;
 
 import com.freeroom.container.NewyaoContainer;
 import com.freeroom.resource.PersonResource;
-import com.freeroom.websocket.TalkServlet;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
-import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -28,7 +25,7 @@ public class NewyaoApplication extends Application<NewyaoConfiguration> {
     @Override
     public void run(final NewyaoConfiguration newyaoConfiguration, final Environment environment) throws Exception {
         environment.jersey().register(context.getBean(PersonResource.class));
-        environment.getApplicationContext().getServletHandler()
-                .addServletWithMapping(TalkServlet.class, "/ws/*");
+//        environment.getApplicationContext().getServletHandler()
+//                .addServletWithMapping(TalkServlet.class, "/ws/*");
     }
 }
